@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f8fc" />
+    <meta name="description" content="A calmer way to plan your days." />
+    <title>Daylight — Calendar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#" aria-label="Daylight home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><rect x="3" y="5" width="26" height="24" rx="8" fill="currentColor"/><path d="M10 3v5m12-5v5M8 12h16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="m13 19 2 2 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span>daylight<span class="brand-period">.</span></span>
+        </a>
+
+        <button class="create-button" id="create-button" type="button">
+          <span class="plus-icon">+</span>
+          <span>Create event</span>
+          <span class="shortcut">N</span>
+        </button>
+
+        <section class="mini-calendar" aria-label="Mini calendar">
+          <div class="mini-calendar-heading">
+            <h2 id="mini-month-label"></h2>
+            <div class="icon-actions">
+              <button class="icon-button mini-nav" data-step="-1" aria-label="Previous month" type="button">‹</button>
+              <button class="icon-button mini-nav" data-step="1" aria-label="Next month" type="button">›</button>
+            </div>
+          </div>
+          <div class="mini-grid mini-weekdays" aria-hidden="true">
+            <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+          </div>
+          <div class="mini-grid" id="mini-calendar-grid"></div>
+        </section>
+
+        <section class="sidebar-section calendar-list">
+          <div class="section-heading"><h2>My calendars</h2><button class="icon-button tiny-add" type="button" aria-label="Add calendar">+</button></div>
+          <label class="calendar-option"><input type="checkbox" checked data-calendar="Personal" /><span class="calendar-dot dot-purple"></span><span>Personal</span></label>
+          <label class="calendar-option"><input type="checkbox" checked data-calendar="Work" /><span class="calendar-dot dot-blue"></span><span>Work</span></label>
+          <label class="calendar-option"><input type="checkbox" checked data-calendar="Family" /><span class="calendar-dot dot-orange"></span><span>Family</span></label>
+          <label class="calendar-option"><input type="checkbox" checked data-calendar="Focus time" /><span class="calendar-dot dot-green"></span><span>Focus time</span></label>
+        </section>
+
+        <section class="sidebar-note">
+          <span class="note-sparkle" aria-hidden="true">✳</span>
+          <p class="note-title">Make room for what matters.</p>
+          <p class="note-copy">A little breathing space goes a long way.</p>
+          <button type="button" class="note-link" id="focus-tip">A gentle reminder <span>↗</span></button>
+        </section>
+
+        <button class="profile-button" type="button" aria-label="Your profile">
+          <span class="avatar">JD</span>
+          <span class="profile-copy"><strong>Jamie Davis</strong><span>Personal workspace</span></span>
+          <span class="profile-menu">···</span>
+        </button>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div class="mobile-brand">
+            <button class="icon-button mobile-menu" id="mobile-menu" type="button" aria-label="Open navigation">☰</button>
+            <span class="brand-mark small-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="3" y="5" width="26" height="24" rx="8" fill="currentColor"/><path d="M10 3v5m12-5v5M8 12h16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="m13 19 2 2 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+          <div class="breadcrumb"><span>Workspace</span><span class="breadcrumb-divider">/</span><strong>Calendar</strong></div>
+          <div class="topbar-actions">
+            <label class="search-box">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+              <input id="search-input" type="search" placeholder="Search events..." aria-label="Search events" />
+              <kbd>/</kbd>
+            </label>
+            <button class="icon-button help-button" type="button" aria-label="Help">?</button>
+            <button class="notification-button" type="button" aria-label="Notifications"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9m-8 12h4"/></svg><span></span></button>
+            <span class="avatar top-avatar">JD</span>
+          </div>
+        </header>
+
+        <section class="calendar-content">
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR TIME, IN GOOD HANDS</div>
+              <h1 id="page-title">Calendar</h1>
+              <p class="page-subtitle">Make today a little more intentional.</p>
+            </div>
+            <button class="primary-button mobile-create" id="mobile-create" type="button"><span>+</span> New event</button>
+          </div>
+
+          <section class="calendar-card" aria-label="Calendar">
+            <div class="calendar-toolbar">
+              <div class="month-controls">
+                <h2 id="current-month-label"></h2>
+                <div class="month-nav">
+                  <button class="icon-button" id="previous-period" aria-label="Previous period" type="button">‹</button>
+                  <button class="icon-button" id="next-period" aria-label="Next period" type="button">›</button>
+                </div>
+                <button class="today-button" id="today-button" type="button">Today</button>
+              </div>
+              <div class="toolbar-right">
+                <div class="view-switcher" role="group" aria-label="Calendar view">
+                  <button type="button" data-view="month" class="active">Month</button>
+                  <button type="button" data-view="week">Week</button>
+                  <button type="button" data-view="day">Day</button>
+                  <button type="button" data-view="agenda">Agenda</button>
+                </div>
+                <button class="filter-button" id="filter-button" type="button" aria-label="Filter calendars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M7 12h10m-7 5h4"/><circle cx="8" cy="7" r="1.5" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg></button>
+              </div>
+            </div>
+            <div class="calendar-viewport" id="calendar-viewport"></div>
+            <div class="calendar-legend" id="calendar-legend">
+              <span><i class="legend-dot dot-purple"></i>Personal</span>
+              <span><i class="legend-dot dot-blue"></i>Work</span>
+              <span><i class="legend-dot dot-orange"></i>Family</span>
+              <span><i class="legend-dot dot-green"></i>Focus time</span>
+            </div>
+          </section>
+          <footer class="page-footer"><span>Plan with purpose. <span class="footer-sun">☀</span></span><span id="current-time"></span></footer>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="event-modal" aria-hidden="true">
+      <section class="event-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-header">
+          <div><span class="modal-kicker">MAKE IT HAPPEN</span><h2 id="modal-title">Create an event</h2></div>
+          <button class="icon-button close-modal" id="close-modal" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <form id="event-form">
+          <label class="field-label" for="event-title">Event title</label>
+          <input class="form-input title-input" id="event-title" name="title" placeholder="e.g. Coffee with Alex" maxlength="80" required />
+          <div class="form-row">
+            <label class="form-field"><span class="field-label">Date</span><input class="form-input" id="event-date" name="date" type="date" required /></label>
+            <label class="form-field"><span class="field-label">Calendar</span><select class="form-input" id="event-calendar" name="calendar"><option>Personal</option><option>Work</option><option>Family</option><option>Focus time</option></select></label>
+          </div>
+          <div class="form-row">
+            <label class="form-field"><span class="field-label">Starts</span><input class="form-input" id="event-start" name="start" type="time" value="09:00" required /></label>
+            <label class="form-field"><span class="field-label">Ends</span><input class="form-input" id="event-end" name="end" type="time" value="10:00" required /></label>
+          </div>
+          <label class="field-label" for="event-location">Location <span class="optional-label">Optional</span></label>
+          <input class="form-input" id="event-location" name="location" placeholder="Add a place or video link" maxlength="100" />
+          <div class="modal-error" id="modal-error" role="alert"></div>
+          <div class="modal-footer">
+            <button class="delete-button" id="delete-event" type="button" hidden>Delete event</button>
+            <button class="cancel-button" id="cancel-modal" type="button">Cancel</button>
+            <button class="primary-button save-button" type="submit">Save event <span>→</span></button>
+          </div>
+        </form>
+      </section>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
